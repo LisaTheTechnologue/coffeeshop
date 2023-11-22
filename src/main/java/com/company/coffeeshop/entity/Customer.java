@@ -1,5 +1,7 @@
 package com.company.coffeeshop.entity;
 
+import com.company.coffeeshop.enums.PaymentMethodEnum;
+import com.company.coffeeshop.interfaces.IFormatData;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
@@ -22,7 +24,7 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class Customer {
+public class Customer implements IFormatData {
     @InstanceName
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cust_id", nullable = false)
@@ -67,4 +69,19 @@ public class Customer {
     @Column(name = "UPDATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
+
+    public PaymentMethodEnum getPaymentMethod() {
+        return paymentMethod == null ? PaymentMethodEnum.CASH : PaymentMethodEnum.fromId(paymentMethod);
+    }
+
+    public void setPaymentMethod(PaymentMethodEnum paymentMethod) {
+        this.paymentMethod = paymentMethod == null ? null : paymentMethod.getId();
+    }
+
+    @Override
+    public void formatData() {
+        if(paymentMethod == null) {
+            paymentMethod = getPaymentMethod().getId();
+        }
+    }
 }

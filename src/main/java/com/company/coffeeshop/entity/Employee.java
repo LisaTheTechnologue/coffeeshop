@@ -1,5 +1,7 @@
 package com.company.coffeeshop.entity;
 
+import com.company.coffeeshop.enums.EmpShiftEnum;
+import com.company.coffeeshop.interfaces.IFormatData;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
@@ -24,7 +26,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @ToString
-public class Employee {
+public class Employee implements IFormatData {
     @InstanceName
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "emp_ID", nullable = false)
@@ -73,4 +75,20 @@ public class Employee {
     @Column(name = "UPDATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
+
+    public EmpShiftEnum getEmpShift() {
+        return empShift == null ? EmpShiftEnum.MORNING : EmpShiftEnum.fromId(empShift);
+    }
+
+    public void setEmpShift(EmpShiftEnum empShift) {
+        this.empShift = empShift == null ? null : empShift.getId() ;
+    }
+
+
+    @Override
+    public void formatData() {
+        if (empShift == null) {
+            empShift = getEmpShift().getId();
+        }
+    }
 }

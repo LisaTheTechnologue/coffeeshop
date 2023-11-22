@@ -1,5 +1,7 @@
 package com.company.coffeeshop.entity;
 
+import com.company.coffeeshop.enums.DeliveryEnum;
+import com.company.coffeeshop.interfaces.IFormatData;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.metamodel.annotation.InstanceName;
@@ -14,6 +16,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @JmixEntity
@@ -22,13 +25,14 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class Order {
+public class Order implements IFormatData {
     @InstanceName
     @Column(name = "order_id", nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
+    @NotNull
     @Column(name = "emp_id")
     private Long empId;
 
@@ -81,4 +85,19 @@ public class Order {
     @Column(name = "UPDATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
+
+    public DeliveryEnum getDelivery() {
+        return delivery == null ? DeliveryEnum.DELIVERY : DeliveryEnum.fromId(delivery);
+    }
+
+    public void setDelivery(DeliveryEnum delivery) {
+        this.delivery = delivery == null ? null : delivery.getId();
+    }
+
+    @Override
+    public void formatData() {
+        if (delivery == null) {
+            delivery = getDelivery().getId();
+        }
+    }
 }

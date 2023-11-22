@@ -3,6 +3,7 @@
 
     <menu id="application" caption="msg://com.company.coffeeshop/menu.application" insertBefore="administration">
         <item screen="cs_User.browse" caption="msg://com.company.coffeeshop.screen.user/UserBrowse.caption"/>
+        <item class="com.company.coffeeshop.bean.CsMapBean" id="mapMenu" caption="msg://com.company.coffeeshop/Map"/>
         <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
     </menu>
 

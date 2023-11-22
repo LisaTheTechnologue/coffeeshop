@@ -1,5 +1,6 @@
 package com.company.coffeeshop.entity;
 
+import com.company.coffeeshop.interfaces.IFormatData;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.metamodel.annotation.InstanceName;
@@ -21,7 +22,7 @@ import java.util.Date;
 @Setter
 @Getter
 @ToString
-public class Address {
+public class Address implements IFormatData {
     @InstanceName
     @Column(name = "add_id", nullable = false)
     @Id
@@ -66,4 +67,9 @@ public class Address {
     @Column(name = "UPDATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
+
+    @Override
+    public void formatData() {
+
+    }
 }
