@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://orderEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="orderDc"
+                  class="com.company.coffeeshop.entity.Order">
+            <fetchPlan extends="_base">
+                <property name="customer" fetchPlan="_local"/>
+                <property name="items">
+                    <property name="item">
+                        <property name="item"/>
+                        <property name="itemPrice"/>
+                        <property name="itemSize"/>
+                    </property>
+                    <property name="quantity"/>
+                </property>
+            </fetchPlan>
+            <loader/>
+            <collection id="itemsDc" property="items"/>
+        </instance>
+        <collection id="empDc" class="com.company.coffeeshop.entity.user.User">
+            <fetchPlan extends="_base"/>
+            <loader id="empDl">
+                <query>
+                    <![CDATA[select e from cs_User e where e.position = 'Cashier']]>
+                </query>
+            </loader>
+        </collection>
+<!--        <collection id="custDc" class="com.company.coffeeshop.entity.Customer">-->
+<!--            <fetchPlan extends="_base"/>-->
+<!--            <loader id="custDl">-->
+<!--                <query>-->
+<!--                    <![CDATA[select e from cs_Customer e]]>-->
+<!--                </query>-->
+<!--            </loader>-->
+<!--        </collection>-->
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <layout expand="editActions" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="orderDc">
+                <column width="350px">
+                    <entityComboBox id="empField" property="employee"
+                                    optionsContainer="empDc">
+                        <actions>
+                            <action id="lookup" type="entity_lookup"/>
+                            <action id="clear" type="entity_clear"/>
+                        </actions>
+                    </entityComboBox>
+                    <entityPicker id="custField" fieldEditable="true"
+                                    property="customer" >
+                        <actions>
+                            <action id="lookup" type="entity_lookup"/>
+                            <action id="clear" type="entity_clear"/>
+                        </actions>
+                    </entityPicker>
+                    <comboBox id="deliveryField" property="delivery"/>
+                    <textField id="addressField" property="address"/>
+                    <textField id="amountField" property="totalQuantity" editable="false"/>
+                    <textField id="priceField" property="totalPrice" editable="false"/>
+                </column>
+            </form>
+            <groupBox id="itemsBox" caption="msg://com.company.coffeeshop.entity/Order.itemSet" >
+                <table id="itemsTable" dataContainer="itemsDc" width="100%" height="200px">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="item.item"/>
+                        <column id="quantity"/>
+                        <column id="itemSize"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="itemsTable.create"/>
+                        <button action="itemsTable.edit"/>
+                        <button action="itemsTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

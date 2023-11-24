@@ -1,6 +1,9 @@
 package com.company.coffeeshop;
 
 import com.google.common.base.Strings;
+import io.jmix.core.repository.EnableJmixDataRepositories;
+import io.jmix.securitydata.impl.role.assignment.DatabaseRoleAssignmentProvider;
+import io.jmix.securitydata.impl.role.provider.DatabaseResourceRoleProvider;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +19,7 @@ import org.springframework.core.env.Environment;
 import javax.sql.DataSource;
 
 @SpringBootApplication
+@EnableJmixDataRepositories
 public class CoffeeshopApplication {
 
     @Autowired
@@ -23,6 +27,18 @@ public class CoffeeshopApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CoffeeshopApplication.class, args);
+    }
+
+    @Bean
+    @Primary
+    DatabaseRoleAssignmentProvider databaseRoleAssignmentProvider(){
+        return new DatabaseRoleAssignmentProvider();
+    }
+
+    @Bean
+    @Primary
+    DatabaseResourceRoleProvider databaseResourceRoleProvider(){
+        return new DatabaseResourceRoleProvider();
     }
 
     @Bean

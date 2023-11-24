@@ -1,6 +1,6 @@
 package com.company.coffeeshop.security;
 
-import com.company.coffeeshop.entity.User;
+import com.company.coffeeshop.entity.user.User;
 import io.jmix.securitydata.user.AbstractDatabaseUserRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.GrantedAuthority;

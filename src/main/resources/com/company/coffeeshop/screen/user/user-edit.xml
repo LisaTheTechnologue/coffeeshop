@@ -4,7 +4,7 @@
         focusComponent="form">
     <data>
         <instance id="userDc"
-                  class="com.company.coffeeshop.entity.User">
+                  class="com.company.coffeeshop.entity.user.User">
             <fetchPlan extends="_base"/>
             <loader/>
         </instance>

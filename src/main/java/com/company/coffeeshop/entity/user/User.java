@@ -1,6 +1,8 @@
-package com.company.coffeeshop.entity;
+package com.company.coffeeshop.entity.user;
 
 import io.jmix.core.HasTimeZone;
+import io.jmix.core.annotation.DeletedBy;
+import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.annotation.Secret;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.SystemLevel;
@@ -8,11 +10,18 @@ import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import io.jmix.security.authentication.JmixUserDetails;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.UUID;
 
 @JmixEntity
@@ -20,6 +29,8 @@ import java.util.UUID;
 @Table(name = "CS_USER", indexes = {
         @Index(name = "IDX_CS_USER_ON_USERNAME", columnList = "USERNAME", unique = true)
 })
+@NoArgsConstructor
+@Data
 public class User implements JmixUserDetails, HasTimeZone {
 
     @Id
@@ -54,6 +65,46 @@ public class User implements JmixUserDetails, HasTimeZone {
 
     @Column(name = "TIME_ZONE_ID")
     protected String timeZoneId;
+
+    @Column(name = "position")
+    protected String position;
+
+    @CreatedBy
+    @Column(name = "CREATED_BY")
+    private String createdBy;
+
+    @CreatedDate
+    @Column(name = "CREATED_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+    @DeletedBy
+    @Column(name = "DELETED_BY")
+    private String deletedBy;
+
+    @DeletedDate
+    @Column(name = "DELETED_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deletedDate;
+
+    @LastModifiedBy
+    @Column(name = "UPDATED_BY")
+    private String updatedBy;
+
+    @LastModifiedDate
+    @Column(name = "UPDATED_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedDate;
+
+    public User(String username, String password, String firstName, String lastName, String email, Boolean active, String timeZoneId) {
+        this.username = username;
+        this.password = password;//this.encrypt(password);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.active = active;
+        this.timeZoneId = timeZoneId;
+    }
 
     @Transient
     protected Collection<? extends GrantedAuthority> authorities;
@@ -167,5 +218,10 @@ public class User implements JmixUserDetails, HasTimeZone {
 
     public void setTimeZoneId(String timeZoneId) {
         this.timeZoneId = timeZoneId;
+    }
+
+    String encrypt(String password) {
+        // encryption logic
+        return "";
     }
 }

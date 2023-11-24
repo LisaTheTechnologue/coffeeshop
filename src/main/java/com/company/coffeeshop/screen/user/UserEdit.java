@@ -1,6 +1,6 @@
 package com.company.coffeeshop.screen.user;
 
-import com.company.coffeeshop.entity.User;
+import com.company.coffeeshop.entity.user.User;
 import io.jmix.core.EntityStates;
 import io.jmix.core.security.event.SingleUserPasswordChangeEvent;
 import io.jmix.ui.Notifications;

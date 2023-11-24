@@ -1,0 +1,26 @@
+#Technical stack
+## Backend building blocks
+grpc-ecosystem/grpc-gateway/v2
+labstack/echo/v4
+rabbitmq/amqp091-go
+kyleconroy/sqlc
+pq
+golang-migrate/migrate/v4
+### Utils
+google/wire
+ilyakaznacheev/cleanenv
+golang.org/x/exp/slog
+sirupsen/logrus
+samber/lo
+automaxprocs/maxprocs
+stretchr/testify
+golang/glog
+google/uuid
+google.golang.org/genproto
+google.golang.org/grpc
+google.golang.org/protobuf
+## Infrastructure
+Postgres, RabbitMQ
+Hashicorp Nomad, Consul (Connect), Vault, Terraform
+docker and docker-compose
+devcontainer for reproducible development environment

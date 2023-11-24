@@ -33,9 +33,11 @@ public class Employee implements IFormatData {
     @Id
     private Long empId;
 
-    @Column(name = "emp_name", nullable = false)
-    private String empName;
+    @Column(name = "emp_firstname", nullable = false)
+    private String empFirstName;
 
+    @Column(name = "emp_lastname", nullable = false)
+    private String empLastName;
     @Column(name = "emp_pos", nullable = false)
     private String empPos;
 

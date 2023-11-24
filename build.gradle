@@ -45,9 +45,11 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.28'
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
 
-    implementation 'com.google.cloud:spring-cloud-gcp-starter'
-    implementation 'io.jmix.oidc:jmix-oidc-starter'
-    implementation 'org.springframework.kafka:spring-kafka'
+//    implementation 'com.google.cloud:spring-cloud-gcp-dependencies:4.8.4'
+//    implementation 'io.jmix.oidc:jmix-oidc-starter'
+    // https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka
+//    implementation 'org.springframework.kafka:spring-kafka:3.1.0'
+//    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
 }
 

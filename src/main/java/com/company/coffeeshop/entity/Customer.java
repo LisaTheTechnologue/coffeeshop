@@ -17,6 +17,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @JmixEntity
 @Table(name = "CS_CUSTOMER", schema = "shop_owner")
@@ -31,17 +32,17 @@ public class Customer implements IFormatData {
     @Id
     private Long custId;
 
-    @Column(name = "cust_firstname", nullable = false)
-    private String custFirstName;
-
-    @Column(name = "cust_lastname", nullable = false)
-    private String custLastName;
+    @Column(name = "cust_name", nullable = false)
+    private String custName;
 
     @Column(name = "payment_method")
     private String paymentMethod;
 
-    @Column(name = "emp_phonenum")
-    private String empPhoneNum;
+    @Column(name = "cust_phonenum")
+    private String custPhoneNum;
+
+    @Column(name = "cust_address")
+    private String custAddress;
 
     @DeletedBy
     @Column(name = "DELETED_BY")

@@ -1,6 +1,6 @@
 package com.company.coffeeshop.screen.user;
 
-import com.company.coffeeshop.entity.User;
+import com.company.coffeeshop.entity.user.User;
 import io.jmix.ui.navigation.Route;
 import io.jmix.ui.screen.*;
 

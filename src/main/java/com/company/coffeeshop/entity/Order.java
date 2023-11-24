@@ -1,12 +1,17 @@
 package com.company.coffeeshop.entity;
 
+import com.company.coffeeshop.entity.user.User;
 import com.company.coffeeshop.enums.DeliveryEnum;
 import com.company.coffeeshop.interfaces.IFormatData;
+import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
+import io.jmix.core.entity.annotation.OnDelete;
+import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import io.jmix.core.metamodel.annotation.NumberFormat;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,13 +23,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @JmixEntity
 @Table(name = "CS_ORDER", schema = "shop_owner")
 @Entity(name = "cs_Order")
-@Setter
-@Getter
-@ToString
+@Data
 public class Order implements IFormatData {
     @InstanceName
     @Column(name = "order_id", nullable = false)
@@ -32,22 +37,8 @@ public class Order implements IFormatData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @NotNull
-    @Column(name = "emp_id")
-    private Long empId;
-
-    @Column(name = "order_ts")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date orderTs;
-
-    @Column(name = "cust_id")
-    private Long custId;
-
-    @Column(name = "item_id")
-    private Long itemId;
-
-    @Column(name = "quantity")
-    private Integer quantity;
+    @Column(name = "total_quantity")
+    private Integer totalQuantity;
 
     @NumberFormat(pattern = "#,###.##", decimalSeparator = ".", groupingSeparator = ",")
     @Column(name = "total_price")
@@ -56,8 +47,8 @@ public class Order implements IFormatData {
     @Column(name = "delivery")
     private String delivery;
 
-    @Column(name = "add_id")
-    private Long addId;
+    @Column(name = "address")
+    private String address;
 
     @CreatedBy
     @Column(name = "CREATED_BY")
@@ -85,6 +76,27 @@ public class Order implements IFormatData {
     @Column(name = "UPDATED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
+
+//        @JoinTable(name = "cs_order_item_link",
+//            joinColumns = @JoinColumn(name = "order_id"),
+//            inverseJoinColumns = @JoinColumn(name = "item_id"))
+//    @ManyToMany(mappedBy = "")
+//    @OnDelete(DeletePolicy.UNLINK)
+//    protected Set<Item> itemSet;
+    @Composition
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToMany(mappedBy = "order")
+    protected Set<OrderItemLink> items;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cust_id")
+    @OnDelete(DeletePolicy.UNLINK)
+    protected Customer customer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    @OnDelete(DeletePolicy.UNLINK)
+    protected User employee;
 
     public DeliveryEnum getDelivery() {
         return delivery == null ? DeliveryEnum.DELIVERY : DeliveryEnum.fromId(delivery);

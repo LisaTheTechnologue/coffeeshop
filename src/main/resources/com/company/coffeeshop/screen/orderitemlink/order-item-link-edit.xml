@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://orderItemLinkEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="orderItemLinkDc"
+                  class="com.company.coffeeshop.entity.OrderItemLink">
+            <fetchPlan extends="_base"/>
+            <loader/>
+        </instance>
+        <collection id="itemDc" class="com.company.coffeeshop.entity.Item">
+        <fetchPlan extends="_base"/>
+        <loader id="itemDl">
+            <query>
+                <![CDATA[select e from cs_Item e]]>
+            </query>
+        </loader>
+    </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout spacing="true" expand="formBox">
+        <vbox id="formBox" spacing="true">
+            <form id="form" dataContainer="orderItemLinkDc">
+                <column width="350px">
+                    <entityComboBox id="itemField" property="item"
+                                    optionsContainer="itemDc">
+                        <actions>
+                            <action id="clear" type="entity_clear"/>
+                        </actions>
+                    </entityComboBox>
+                    <textField id="quantityField" property="quantity"/>
+                    <radioButtonGroup id="sizeField" property="itemSize" orientation="horizontal" optionsEnum="com.company.coffeeshop.enums.ItemSizeEnum"/>
+                </column>
+            </form>
+        </vbox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

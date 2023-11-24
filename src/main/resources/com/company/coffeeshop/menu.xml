@@ -2,9 +2,16 @@
 <menu-config xmlns="http://jmix.io/schema/ui/menu">
 
     <menu id="application" caption="msg://com.company.coffeeshop/menu.application" insertBefore="administration">
-        <item screen="cs_User.browse" caption="msg://com.company.coffeeshop.screen.user/UserBrowse.caption"/>
+
         <item class="com.company.coffeeshop.bean.CsMapBean" id="mapMenu" caption="msg://com.company.coffeeshop/Map"/>
+        <item screen="cs_Item.browse" caption="msg://com.company.coffeeshop.screen.item/itemBrowse.menu"/>
+        <item screen="cs_UserDTO.browse" caption="msg://com.company.coffeeshop.screen.userdto/userDTOBrowse.menu"/>
+        <item screen="cs_Order.browse" caption="msg://com.company.coffeeshop.screen.order/orderBrowse.menu"/>
+        <item screen="cs_Customer.browse" caption="msg://com.company.coffeeshop.screen.customer/customerBrowse.menu"/>
+
+
         <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+        <item screen="cs_User.browse" caption="msg://com.company.coffeeshop.screen.user/UserBrowse.caption"/>
     </menu>
 
 </menu-config>
