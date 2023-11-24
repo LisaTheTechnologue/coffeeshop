@@ -28,7 +28,7 @@ public class OrderEdit extends StandardEditor<Order> {
         String value = event.getText();
         if (!Strings.isNullOrEmpty(value)) {
             customer = dataContext.create(Customer.class);
-            customer.setCustName(value);
+            customer.setUsername(value);
             custField.setValue(customer);
         }
     }

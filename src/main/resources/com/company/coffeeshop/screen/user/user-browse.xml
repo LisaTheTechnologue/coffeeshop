@@ -59,7 +59,13 @@
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="usersTable.create"/>
+                <popupButton id="createBtn" caption="msg://create">
+                    <actions>
+                        <action id="createEmployee" caption="msg://createEmployee"/>
+                        <action id="createCustomer" caption="msg://createCustomer"/>
+                        <action id="createUser" caption="msg://createUser"/>
+                    </actions>
+                </popupButton>
                 <button id="editBtn" action="usersTable.edit"/>
                 <button id="removeBtn" action="usersTable.remove"/>
                 <button id="showRoleAssignmentsBtn" action="usersTable.showRoleAssignments"/>

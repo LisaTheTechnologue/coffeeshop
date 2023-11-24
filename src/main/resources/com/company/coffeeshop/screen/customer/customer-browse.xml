@@ -44,7 +44,6 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="custId"/>
                 <column id="custFirstName"/>
                 <column id="custLastName"/>
                 <column id="paymentMethod"/>

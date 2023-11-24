@@ -19,11 +19,11 @@
             <loader/>
             <collection id="itemsDc" property="items"/>
         </instance>
-        <collection id="empDc" class="com.company.coffeeshop.entity.user.User">
+        <collection id="empDc" class="com.company.coffeeshop.entity.user.Employee">
             <fetchPlan extends="_base"/>
             <loader id="empDl">
                 <query>
-                    <![CDATA[select e from cs_User e where e.position = 'Cashier']]>
+                    <![CDATA[select e from cs_Employee e where e.position = 'Cashier']]>
                 </query>
             </loader>
         </collection>

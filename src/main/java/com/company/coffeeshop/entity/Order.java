@@ -1,6 +1,6 @@
 package com.company.coffeeshop.entity;
 
-import com.company.coffeeshop.entity.user.User;
+import com.company.coffeeshop.entity.user.Employee;
 import com.company.coffeeshop.enums.DeliveryEnum;
 import com.company.coffeeshop.interfaces.IFormatData;
 import io.jmix.core.DeletePolicy;
@@ -12,18 +12,13 @@ import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import io.jmix.core.metamodel.annotation.NumberFormat;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @JmixEntity
@@ -96,7 +91,7 @@ public class Order implements IFormatData {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     @OnDelete(DeletePolicy.UNLINK)
-    protected User employee;
+    protected Employee employee;
 
     public DeliveryEnum getDelivery() {
         return delivery == null ? DeliveryEnum.DELIVERY : DeliveryEnum.fromId(delivery);
