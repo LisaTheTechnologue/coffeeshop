@@ -9,6 +9,7 @@ import io.jmix.core.entity.annotation.SystemLevel;
 import io.jmix.core.metamodel.annotation.DependsOnProperties;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import io.jmix.oidc.user.JmixOidcUser;
 import io.jmix.security.authentication.JmixUserDetails;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,7 +36,7 @@ import java.util.UUID;
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING,
         name = "DTYPE")
 @DiscriminatorValue("User")
-public class User implements JmixUserDetails, HasTimeZone {
+public class User implements JmixUserDetails, HasTimeZone, JmixOidcUser {
 
     @Id
     @Column(name = "ID")
