@@ -7,6 +7,8 @@
         <collection id="ordersDc"
                     class="com.company.coffeeshop.entity.Order">
             <fetchPlan extends="_base">
+                <property name="employee" fetchPlan="_base"/>
+                <property name="customer" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="ordersDl">
                 <query>
@@ -50,8 +52,12 @@
                 <column id="customer"/>
                 <column id="address"/>
 <!--                <column id="itemId"/>-->
-                <column id="totalQuantity"/>
-                <column id="totalPrice"/>
+                <column id="totalQuantity">
+                    <aggregation type="SUM"/>
+                </column>
+                <column id="totalPrice">
+                    <aggregation type="SUM"/>
+                </column>
                 <column id="delivery"/>
             </columns>
             <simplePagination/>

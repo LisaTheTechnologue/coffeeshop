@@ -18,6 +18,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+public class Item implements IFormatData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id", nullable = false)
     @Id
@@ -47,7 +48,7 @@ public class Item {
     @NumberFormat(pattern = "##.##", decimalSeparator = ".", groupingSeparator = ",")
     @Column(name = "item_price")
     @CurrencyValue(currency = "$")
-    private Double itemPrice;
+    private BigDecimal itemPrice;
 
     @Column(name = "DELETED_BY")
     private String deletedBy;
@@ -89,4 +90,11 @@ public class Item {
         this.itemSize = itemSize == null ? null : itemSize.getId();
     }
 
+
+    @Override
+    public void formatData() {
+        if(itemSize == null) {
+            itemSize = getItemSize().getId();
+        }
+    }
 }

@@ -18,6 +18,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 
@@ -37,7 +38,7 @@ public class Order implements IFormatData {
 
     @NumberFormat(pattern = "#,###.##", decimalSeparator = ".", groupingSeparator = ",")
     @Column(name = "total_price")
-    private Float totalPrice;
+    private BigDecimal totalPrice;
 
     @Column(name = "delivery")
     private String delivery;
@@ -89,7 +90,7 @@ public class Order implements IFormatData {
     protected Customer customer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "emp_id")
     @OnDelete(DeletePolicy.UNLINK)
     protected Employee employee;
 

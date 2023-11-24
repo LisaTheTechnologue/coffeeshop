@@ -5,7 +5,9 @@
     <data>
         <instance id="itemDc"
                   class="com.company.coffeeshop.entity.Item">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="tags" fetchPlan="_local"/>
+            </fetchPlan>
             <loader/>
         </instance>
     </data>
@@ -38,6 +40,13 @@
                     <textField id="itemCatField" property="itemCat"/>
                     <radioButtonGroup id="itemSizeField" property="itemSize" optionsEnum="com.company.coffeeshop.enums.ItemSizeEnum"/>
                     <currencyField id="itemPriceField" property="itemPrice" currencyLabelPosition="LEFT" showCurrencyLabel="true" currency="$"/>
+                    <tagField id="tagField" property="tags" >
+                        <query entityClass="com.company.coffeeshop.entity.ItemTag"
+                               escapeValueForLike="true"
+                               searchStringFormat="%${searchString}%">
+                            select e from cs_ItemTag e where e.isActive=true and lower(e.name) like lower(:searchString) escape '\'
+                        </query>
+                    </tagField>
                 </column>
             </form>
         </vbox>

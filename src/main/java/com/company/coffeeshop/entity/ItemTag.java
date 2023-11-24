@@ -21,7 +21,10 @@ public class ItemTag {
     @Id
     private Long id;
 
-    @Column(name = "NAME")
+    @Column(name = "item_tag_name")
     @InstanceName
     private String name;
+
+    @Column(name = "is_active")
+    private Boolean isActive;
 }
